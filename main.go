@@ -16,6 +16,7 @@ var (
 	discordToken = os.Getenv("DISCORD_BOT_TOKEN")
 	channelID    = os.Getenv("DISCORD_CHANNEL_ID")
 	amazonURLs   = []string{
+		"https://a.co/d/dLgkilE",
 		"https://a.co/d/d6vEEXI",
 		"https://a.co/d/7tC83zP",
 		"https://a.co/d/5lRIZfk",
@@ -41,16 +42,7 @@ func main() {
 	}
 	defer discord.Close()
 
-	ticker := time.NewTicker(5 * time.Minute)
-	defer ticker.Stop()
-
-	// Initial check
 	checkAllProducts(discord)
-
-	// Periodic checks
-	for range ticker.C {
-		checkAllProducts(discord)
-	}
 }
 
 func checkAllProducts(discord *discordgo.Session) {
